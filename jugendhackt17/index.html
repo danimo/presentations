@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>Let's do it live!</title>
+
+		<link rel="stylesheet" href="https://cdn.molkentin.net/reveal.js/css/reveal.css">
+		<link rel="stylesheet" href="https://cdn.molkentin.net/reveal.js/css/theme/league.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="https://cdn.molkentin.net/reveal.js/lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) 
+				? 'https://cdn.molkentin.net/reveal.js/css/print/pdf.css'
+				: 'https://cdn.molkentin.net/reveal.js/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-markdown data-background-image="img/winkekatze.jpg" style="color:black;">
+					# Let's do it live!
+					### @danimo, C3VOC
+				</section>
+				<section>
+					<h2>Konferenzaufzeichnungen ohne VOC</h2>
+					<ul>
+						<li class="fragment">Aufzeichnung mit teurer Hardware</li>
+						<li class="fragment">Nachbearbeitung mit teurer Software</li>
+						<li class="fragment"> Die wirklich irgendwann fertig wird!</li>
+						<li class="fragment">Wirklich!</li>
+						<li class="fragment"> … wenn die Festplatte nicht stirbt…</li>
+					</ul>
+				</section>
+				<section data-transition="zoom">
+					<img src="img/deadmeme.jpg" height="600"/>
+				</section>
+				<section data-markdown>
+					# "Was nicht auf der Konferenz passiert, passiert nie."
+					&mdash; Alte VOC-Weisheit
+				</section>
+				<section data-markdown>
+					# "Hardware eventually fails, Software eventually works."
+				</section>
+				<section data-markdown data-background-image="img/stack.jpg">
+					# Der Stack
+				</section>
+				<section data-markdown data-background-image="img/roomsetup.jpg">
+					# Recording Setup vor Ort
+				</section>
+				<section data-markdown data-background-image="img/voctomix.jpg">
+					# Voctomix
+				</section>
+				<section data-markdown data-background-image="img/servercase.jpg">
+					# Server (Vor Ort)
+				</section>
+				<section data-markdown data-background-image="img/stats.jpg">
+					# Statistiken
+				</section>
+				<section data-markdown data-background-image="img/audio_qa.jpg">
+					# Qualitätssicherung 
+				</section>
+				<section data-markdown data-background-image="img/rz.jpg">
+					# Mehr Server (CDN)
+				</section>
+				<section data-markdown data-background-image="img/tracker.png">
+					# Workflowsoftware 
+				</section>
+				<section data-markdown data-background-image="img/tallycom.jpg">
+					# Echt nützliche Basteleien als Prototypen...
+				</section>
+				<section data-markdown data-background-image="img/tallycom_finished.jpg">
+					# ...und in fertig
+				</section>
+       				<section data-markdown data-background-image="img/mediacccde.jpg">
+					# Voctoweb (media.ccc.de)
+					## Unser eigenes YouTube 
+				</section>
+	                        <section data-background-image="img/github.png">
+					<h1>Alles Open Source!</h1>
+					<img alt="QR-Code fuer Github Repo" src="img/github_qr.png" height="300" />
+				</section>
+	                        <section>
+					<h1>Es gibt viel zu tun</h1>
+				<!--	- Mehrspur-Audio
+					- 4K (UHD) Streams
+					- Software verbessern
+					- Infrastruktur aufbohren
+					- ... -->
+					<img data-src="img/projects_qr.png" height="400" />
+				</section>
+	                        <section data-markdown data-background-image="img/winkekatze2.jpg">
+					# Fragen? Ideen?
+
+					## Mehr unter c3voc.de
+				</section>
+	                        <section>
+					<h1>Flowchart</h1>
+					<img data-src="img/flowchart.png" height="400" />
+				</section>
+			</div>
+		</div>
+
+		<script src="https://cdn.molkentin.net/reveal.js/lib/js/head.min.js"></script>
+		<script src="https://cdn.molkentin.net/reveal.js/js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'https://cdn.molkentin.net/reveal.js/plugin/markdown/marked.js' },
+					{ src: 'https://cdn.molkentin.net/reveal.js/plugin/markdown/markdown.js' },
+					{ src: 'https://cdn.molkentin.net/reveal.js/plugin/notes/notes.js', async: true },
+					{ src: 'https://cdn.molkentin.net/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+			Reveal.configure({ slideNumber: true });
+		</script>
+	</body>
+</html>
