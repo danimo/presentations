@@ -1,0 +1,186 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>Let's do it live!</title>
+
+		<link rel="stylesheet" href="https://cdn.molkentin.net/reveal.js/css/reveal.css">
+		<link rel="stylesheet" href="https://cdn.molkentin.net/reveal.js/css/theme/league.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="https://cdn.molkentin.net/reveal.js/lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) 
+				? 'https://cdn.molkentin.net/reveal.js/css/print/pdf.css'
+				: 'https://cdn.molkentin.net/reveal.js/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-markdown data-background-image="img/winkekatze.jpg" style="color:black;">
+					# Let's do it live!
+					### @danimo, C3VOC
+				</section>
+				<section>
+					<h2>Konferenzaufzeichnungen ohne VOC</h2>
+					<ul>
+						<li class="fragment">Aufzeichnung mit teurer Hardware</li>
+						<li class="fragment">Nachbearbeitung mit teurer Software</li>
+						<li class="fragment"> Die wirklich irgendwann fertig wird!</li>
+						<li class="fragment">Wirklich!</li>
+						<li class="fragment"> … wenn die Festplatte nicht stirbt…</li>
+					</ul>
+				</section>
+				<section data-transition="zoom">
+					<img src="img/deadmeme.jpg" height="600"/>
+				</section>
+				<section data-markdown>
+					# "Was nicht auf der Konferenz passiert, passiert nie."
+					&mdash; Alte VOC-Weisheit
+				</section>
+				<section data-markdown>
+					# Über mich
+					* Daniel "danimo" Molkentin
+					* Seit mehr als 5 Jahren beim VOC
+					* Datengarten und Chaosradio im CCCB
+					* Broterwerbsarbeit: Linux
+				</section>
+				<section data-markdown>
+					# Über die Präsentation 
+					* Kurzer historischer Abriss
+					* All things Hardware
+					* All things Software
+					* Wie alles in einander greift
+				</section>
+				<section data-markdown>
+					# Das C3VOC
+					* Zusammenschluss von medieninteressierten Nerds
+					* Ziel: Vorträge auf CCC-Veranstaltungen aufzeichnen
+					* Accidentially: Vorträge auf coolen Events aufzeichnen
+					* Erklärte Mittel: Freie Software, Günstige Hardware, Dokumentation
+				</section>
+				<section data-markdown data-background-image="img/stack.jpg">
+					# Hardware-Stack
+				</section>
+				<section data-markdown data-background-image="img/case_top.jpg">
+					# Event-Case (oben)
+				</section>
+				<section data-markdown data-background-image="img/case_bottom.jpg">
+					# Event-Case (unten) 
+				</section>
+				<section data-markdown data-background-image="img/encoder_back.jpg">
+					# Encoder (Rückseite) 
+				</section>
+				<section data-markdown data-background-image="img/roomsetup.jpg">
+					# Fertig aufgebautes Setup
+					## (Wir können auch Audio)
+				</section>
+				<section data-markdown data-background-image="img/minions.jpg">
+					# Encoder Minions vor Ort
+				</section>
+				<section data-markdown data-background-image="img/servercase.jpg">
+					# Event Rack
+				</section>
+				<section data-markdown data-background-image="img/rz.jpg">
+					# CDN (Standort Berlin)
+				</section>
+				<section data-markdown data-background-image="img/haystack.jpg">
+					# Software-Stack
+				</section>
+				<section>
+					<section data-markdown data-background-image="img/voctomix.jpg">
+						# Voctomix
+						* Pythong/GStreamer
+						* Core/Presentation-Architektur
+							* Core: Mixing, Streaming, Recording
+							* Presentation: Darstellen der Previews, Bedienelemente
+						* Recording auf Software-RAID
+						* rsync auf zentrales Storage bei großen Events
+					</section>
+					<section data-markdown>
+							## Warum ein Software-Mischer?
+							&gt; "Hardware eventually fails, Software eventually works."
+
+							&gt; Wir wollen ein flexibles Setup, dass jeder mit preiswerter Standard-Hardware betreiben kann
+					</section>
+				</section>
+				<section data-markdown data-background-image="img/tracker.png">
+					# Produktion: Workflow-Software
+					## Live Demo
+				</section>
+				<section data-markdown data-background-image="img/stats.jpg">
+					# Statistiken
+				</section>
+				<section data-markdown data-background-image="img/audio_qa.jpg">
+					# Qualitätssicherung 
+				</section>
+				<section data-markdown data-background-image="img/mediacccde.jpg">
+					# Voctoweb (media.ccc.de)
+					## Unser eigenes YouTube
+				</section>
+				<section data-markdown data-background-image="">
+					# Deployment
+					* Configuration Management
+					* Rollenbasiertes Deployment
+					* Mittel der Wahl: Ansible
+					* Trennung Setup und Secrets (via ansible-keepass)
+					* Ansible-Rezepte auf GitHub
+				</section>
+	                        <section data-background-image="img/github.png">
+					<h1>Alles Open Source!</h1>
+					<img alt="QR-Code fuer Github Repo" src="img/github_qr.png" height="300" />
+				</section>
+		                <section>
+					<h2>Flowchart</h2>
+					<img data-src="img/flowchart.png" height="500" />
+				</section>
+				<section data-markdown data-background-image="img/eng.jpg">
+					## Streaming aus dem Feld
+					* Satellitenuplink: Unbezahlbar -> LTE <!-- .element: class="fragment" -->
+					* Kameras streamen h264 via RTMP (USB) <!-- .element: class="fragment" -->
+					* Ganze Setups: LEDE Router zw. Netz und LTE-Stick <!-- .element: class="fragment" -->
+					* Datenrate: max. 3-5 MBit/s, statisch: 1-3 MBit/s <!-- .element: class="fragment" -->
+					* Problematisch mit UMTS, problemlos mit LTE, aber: <!-- .element: class="fragment" -->
+						* Überbuchte Netze
+						* Übersättigte Zellen (Events...)
+					* Lebensretter Dayflat-Option <!-- .element: class="fragment" -->
+				</section>
+	                        <section>
+					<h1>Es gibt viel zu tun</h1>
+					<img data-src="img/projects_qr.png" height="400" />
+				</section>
+		                <section data-markdown data-background-image="img/winkekatze2.jpg">
+						# Fragen? Ideen?
+
+						## Mehr unter c3voc.de
+				</section>
+			</div>
+		</div>
+
+		<script src="https://cdn.molkentin.net/reveal.js/lib/js/head.min.js"></script>
+		<script src="https://cdn.molkentin.net/reveal.js/js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'https://cdn.molkentin.net/reveal.js/plugin/markdown/marked.js' },
+					{ src: 'https://cdn.molkentin.net/reveal.js/plugin/markdown/markdown.js' },
+					{ src: 'https://cdn.molkentin.net/reveal.js/plugin/notes/notes.js', async: true },
+					{ src: 'https://cdn.molkentin.net/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+			Reveal.configure({ slideNumber: true });
+		</script>
+	</body>
+</html>
