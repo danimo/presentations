@@ -54,7 +54,7 @@ Daniel Molkentin\
 ---
 ## About infra.run (Cont'd)
  How it's going:
-  * Running a large BBB cluster serving public schools in Berlin, Bavaria and schools in other States
+  * Running a large BBB cluster serving public schools in Berlin, Bavaria and schools in other states
   * Revamping Lernraum Berlin (SSO, GDPR-compliant retention policy)
   * Setting up our own Datacenter
   * Everything we do or host is Open Source
@@ -68,7 +68,7 @@ Daniel Molkentin\
 ---
 ## BBB Bootstrapping
  * Started out with VMs
- * Scaleed out to a few hundered VMs (Intel, 8 Dedi Cores)
+ * Scaled out to a few hundered VMs (Intel, 8 dedi. Cores)
    * Each is good for ~120 users (avg)
    * Each has a companion VM for TURN
  * Quick to ramp up and maintain
@@ -119,8 +119,8 @@ Daniel Molkentin\
  Teachers and Technology
  * Dial-In needed, cluster wide
  * We delivered ([Ansible SIP-GW role](https://gitlab.com/infra.run/public/ansible-sipgw))
-  * Prohibit anonymous calls
-  * Allow first joiner to dial in without anyone joining via Mic first (part of EBBA role now)
+   * Anonymous call blocking
+   * Allow first joiner to dial in without anyone joining via mic first (part of EBBA role now)
 ---
 ## Challenges (Cont'd)
  Security
@@ -137,7 +137,7 @@ Daniel Molkentin\
  Nodes fail Echo Test
  * Write [BBB Selenium Exporter](https://gitlab.com/infra.run/public/bbb-selenium-exporter/)
  * Used to run Echo Tests periodically on all hosts and report to Prometheus
- * On failure, drain node, reboot and rejoin node
+ * On failure, drain, reboot and rejoin node
 ---
 ## Challenges (Cont'd)
  * Scalite has no concept of multiple tenants
