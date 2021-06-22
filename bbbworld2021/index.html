@@ -62,7 +62,7 @@ Daniel Molkentin\
 ---
 ## Choosing BigBlueButton
   * C4E tried Jitsi → did not scale
-  * BBB offered a lot of what our users needed
+  * BBB offered a lot of what our users needed:
     * Moodle integration
     * Whiteboard
     * Moderation features
@@ -102,8 +102,8 @@ Daniel Molkentin\
 ## Challenges (Cont'd)
  The Greedy ISP problem
  * In March, our hoster contacted us
- * Deutsche Telekom (40-50% of our traffic) has a double paid traffic scheme
-   * Tier 1 transit costs also for DTAG AS (!)
+ * DTAG (40-50% of our traffic) is using their market power to make both
+   their customers *and* their customers' targets pay (double paid traffic scheme)
  * Massive BBB traffic busted hosters calculations
  * Consequences: All included traffic zeroed, special traffic pricing for BBB servers
 ---
@@ -137,7 +137,7 @@ Daniel Molkentin\
 ## Challenges (Cont'd)
  Nodes fail Echo Test
  * Write [BBB Selenium Exporter](https://gitlab.com/infra.run/public/bbb-selenium-exporter/)
- * Used to run Echo Tests periodically on all hosts and report to Prometheus
+ * Runs Echo Tests periodically on all hosts and report to Prometheus
  * On failure, drain, reboot and rejoin node
 ---
 ## Challenges (Cont'd)
