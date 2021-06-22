@@ -19,7 +19,7 @@
 			<div class="slides">
                                 <section data-markdown>
                                   <textarea data-template>
-## Scaling BBB for Schools in Lockdown - from Scratch
+## Scaling BBB for Schools in Lockdown — from Scratch
 \
 BigBlueButton World 2021\
 \
@@ -32,7 +32,7 @@ Daniel Molkentin\
   * Challenges (and our solutions)
     * BBB related
     * Social issues
-    * External Factors
+    * External factors
   * Outlook
 ---
 ## About me
@@ -40,8 +40,9 @@ Daniel Molkentin\
   * Software Engineer by trade
     * KDE -> Trolltech/Nokia -> Nextcloud -> SUSE
   * Video person by hobby ([C3VOC](https://c3voc.de))
-  * Sysadmin by heart
+  * Sysadmin at heart
   * Author by accident  
+  * Living in Berlin
 ---
 ## About infra.run
  How it started:
@@ -56,7 +57,7 @@ Daniel Molkentin\
  How it's going:
   * Running a large BBB cluster serving public schools in Berlin, Bavaria and schools in other states
   * Revamping Lernraum Berlin (SSO, GDPR-compliant retention policy)
-  * Setting up our own Datacenter
+  * Setting up our own datacenter
   * Everything we do or host is Open Source
 ---
 ## Choosing BigBlueButton
@@ -68,7 +69,7 @@ Daniel Molkentin\
 ---
 ## BBB Bootstrapping
  * Started out with VMs
- * Scaled out to a few hundered VMs (Intel, 8 dedi. Cores)
+ * Scaled out to a few hundred VMs (Intel, 8 dedi. Cores)
    * Each is good for ~120 users (avg)
    * Each has a companion VM for TURN
  * Quick to ramp up and maintain
@@ -80,7 +81,7 @@ Daniel Molkentin\
    * Each is good for 150 users (avg)
    * Way below potential
  * Optimize heavily
-   * Reduce Cursor update rates
+   * Reduce update rate
    * Roll out TUC-BBB-HTML5-Packages for 2.2
    * Productize 2.3 early
    * Now each is good for up to 300 users (avg)
@@ -143,10 +144,10 @@ Daniel Molkentin\
  * Scalite has no concept of multiple tenants
  * Sharing the secret is a no-go
  * Did I mention we had badly utilized capacity?
- * Lots of little Clusters (well, three...), lots of wasted compute
+ * Lots of little clusters (well, three...), lots of wasted compute
  * Enter b3scale!
 ---
-## b3scale - A multi tenancy BBB scaling frontend
+## b3scale — A multi tenancy BBB scaling frontend
  * Written in Go
  * Development supported through Prototype Fund (BMBF, OKF)
  * Really fast operations
@@ -157,11 +158,11 @@ Daniel Molkentin\
 ---
 ## b3scale (Cont'd)
 
- * Usecases for tags
+ * Use cases for tags
    * *"Frontend friendly_user_A can only use backends tagged bbb_23"*
    * *"Frontent A can only use backends tagged 'A_exclusive'"*
  * Currently in development: HTTP API
- * Next up: Support for Recordings
+ * Next up: Support for recordings
  * Experimental support for hiding nodes
    * XXXX.bbb.infra.run -> bbb.infra.run
    * XXXX.bbb.infra.run -> conference.tenant.org
@@ -176,7 +177,7 @@ Daniel Molkentin\
 ## Success Factors
  * Fast implementation/pickup
    * Translation of waiting page
-   * Discard Notification
+   * Discard notification
      ![End Meeting Dialog](img/endmeeting.png)
  * The Community (esp. BigBlueButton-DE Matrix Channel)
 ---
@@ -185,7 +186,7 @@ Daniel Molkentin\
  * The Kurento Situation (maybe 2.4?)
  * Scheduled/Predictable Rooms/Dial-In
  * Migration of running sessions
- * Whiteboard Export
+ * Whiteboard export
  * iOS Support ¯\\\_(ツ)\_/¯
 ---
 ## Lessons learned
@@ -196,22 +197,22 @@ Daniel Molkentin\
    * Increasing support load
  * Virtualization is expensive, and of little benefit
  * Make sure to understand exactly how your use case differs from others
-   * multiple tenants + customer hosted frontends 
+   * multiple tenants + customer-hosted frontends 
  * Open Source works
 ---
 ## The future for infra.run
   * Limited Liability Company finally goes Coop
-  * Offering a complete Open Source based solution for schools\
+  * Offering a complete Open Source-based solution for schools\
   ![offering](img/schoolenv.svg)
 ---
-## Shoutouts
+## Shout-Outs
  * Blindside and the BBB community
  * noemis
  * Senfcall
  * schrd @ TU Chemnitz
  * EBBA
  * *BrutalBirdie* for backporting patches to EBBA
- * lukas2511 for digging into security related issues
+ * lukas2511 for digging into security-related issues
 
 ---
 ## Thank you!
