@@ -1,0 +1,196 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="https://cdn.molkentin.net/reveal.js-4/dist/reset.css">
+		<link rel="stylesheet" href="https://cdn.molkentin.net/reveal.js-4/dist/reveal.css">
+		<link rel="stylesheet" href="https://cdn.molkentin.net/reveal.js-4/dist/theme/black.css">
+		<link rel="stylesheet" href="reveal-override.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="https://cdn.molkentin.net/reveal.js-4/plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+                                <section data-markdown>
+                                  <textarea data-template>
+## Scaling BBB for Schools in Lockdown - from Scratch
+\
+BigBlueButton World 2021\
+\
+Daniel Molkentin\
+[danimo@infra.run](mailto:danimo@infra.run)
+---
+## About me
+  * Software Engineer by trade
+    * KDE
+    * Trolltech/Nokia
+    * Nextcloud
+    * SUSE
+  * Sysadmin by heart
+  * Author by accident  
+---
+## About infra.run
+ How it started:
+  * Early 2019: First ideas to do a Hosting Coop (*"Hey, I've got some spare RIPE IP space!"*) with an attitude
+  * Dec 2019: Cyber4Edu founded
+  * 2000: Pandemic hits
+  * First baby steps with a larger over-the-weekend conference
+  * No way we do this by hand: Enter Ansible, noemis role
+  * Coop gets deferred for a Limited Liability Company (GmbH)
+---
+## About infra.run (Cont'd)
+ How it's going:
+  * Running a significant BBB cluster
+  * Revamping Lernraum Berlin (SSO, GDPR-compliant retention policy)
+  * Soon offering a complete Open Source based offering for schools (SSO, LMS, Storage, Website Publishing, ...)
+  * Everything we do or host is Open Source
+  * Limited Liability Company finally goes Coop
+---
+## Choosing BigBlueButton
+  * C4E tried Jitsi -> did not scale
+  * BBB offered a lot of what our users needed
+    * Moodle integration
+    * Whiteboard
+    * Moderation features
+---
+## BBB Bootstrapping
+ * Start out with VMs
+ * Scale out to a few hundered VMs (Intel, 8 Dedi Cores)
+   * Each is good for up to 120 users
+   * Each has a companion VM for TURN
+ * Quick to ramp up and maintain
+ * Rather expensive
+ * Reevaluate Costs
+---
+## BBB Bootstrapping (Cont'd)
+ * Rent 100 physical servers (AMD Ryzen 9 3900 12-Core)
+   * Each is good for up to 150 users
+   * Way below potential
+ * Optimize heavily
+   * Reduce Cursor update rates
+   * Roll out TUC-BBB-HTML5-Packages for 2.2
+   * Productize 2.3 early
+   * Now each is good for up to 300 users
+---
+## Challenges (and how we solved them)
+ The 8am problem (less utilized capacity in total)
+ ![Grafana graph](img/8am.png)
+---
+## Challenges (Cont'd)
+ The "All Hands on Cam" problem (even less utilized capacity)
+ * Teacher wants everyone to turn on cams (30+ kids)
+ * Esp. popular with primary school teachers
+ * Lots of entering into and returning from Breakout Rooms
+ * 2.2: Kurento says no
+ * 2.3: Kurento says yes (but only every so often)
+
+---
+## Challenges (Cont'd)
+ Teachers and Technology
+ * Dial-In needed, cluster wide
+ * We delivered ([Ansible SIP-GW role](https://gitlab.com/infra.run/public/ansible-sipgw))
+  * Prohibit Anonymous Calls
+  * Allow first joiner to dial in without anyone joining via Mic first (part of EBBA role now)
+---
+## Challenges (Cont'd)
+ Security
+ * Systemd permissions were off
+   * Service files owned by service users
+     * Implicit PrivEsc (!)
+   * Reported responsibly, mitigated via Ansible
+   * Unfortunately, we saw regressions
+ * Freeswitch with full config
+   * Trim down
+   * Harden via AppArmor
+---
+## Challenges (Cont'd)
+ Nodes fail Echo Test
+ * Write [BBB Selenium Exporter](https://gitlab.com/infra.run/public/bbb-selenium-exporter/)
+ * Used to run Echo Tests periodically on all hosts and report to Prometheus
+ * On failure, drain node, reboot and rejoin node
+---
+## Challenges (Cont'd)
+ * BBB has no concept of multiple tenants in a cluster
+ * Did I meantion we had badly utilized capacity?
+ * Sharing the secret is a no-go
+ * Lots of little Clusters (well, three...), lots of wasted compute
+ * Enter b3scale!
+---
+## b3scale - A multi tenancy BBB scaling frontend
+ * Written in Go
+ * Really fast operations (batch enable/disable/removal)
+ * "Frontends" (tenants) and "Backend" (nodes)
+ * Tags (examples see next slide)
+ * Agent process reports actual load (b3scalenoded)
+ * Monitoring (Prometheus) support
+---
+## b3scale (Cont'd)
+
+ * Usecases for tags
+   * *"Frontend friendly_user_A can only use backends tagged bbb_23"*
+   * *"Frontent A can only use backends tagged 'A_exclusive'"*
+ * Currently in development: HTTP API
+ * Next up: Support for Recordings
+ * Experimental support for hiding nodes
+   * XXXX.bbb.infra.run -> bbb.infra.run
+   * XXXX.bbb.infra.run -> conference.tenant.org
+
+ [https://gitlab.com/infra.run/public/b3scale](https://gitlab.com/infra.run/public/b3scale)
+
+---
+## Success Factors
+ * Fast implementation/pickup
+  * (TODO) Example: Translation of waiting page
+  * (TODO) Example: Discard Notification
+ * The Community (esp. BigBlueButton-DE Matrix Channel)
+---
+## Things to improve
+ * Packaging (working on it)
+ * The Kurento Situation (maybe 2.4?)
+ * Scheduled/Predictable Rooms/Dial-In
+ * Migration of running sessions
+ * Whiteboard Export
+ * iOS Support ¯\\_(ツ)_/¯
+---
+## Shoutouts
+ * Blindside and the BBB community
+ * noemis
+ * Senfcall
+ * schrd @ TU Chemnitz
+ * EBBA
+ * *BrutalBirdie* for backporting patches to EBBA
+
+---
+## Thank you!
+
+Questions?
+---
+                                  </textarea>
+                                </section>
+			</div>
+		</div>
+
+		<script src="https://cdn.molkentin.net/reveal.js-4/dist/reveal.js"></script>
+		<script src="https://cdn.molkentin.net/reveal.js-4/plugin/notes/notes.js"></script>
+		<script src="https://cdn.molkentin.net/reveal.js-4/plugin/markdown/markdown.js"></script>
+		<script src="https://cdn.molkentin.net/reveal.js-4/plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				slideNumber: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
