@@ -26,12 +26,20 @@ BigBlueButton World 2021\
 Daniel Molkentin\
 [danimo@infra.run](mailto:danimo@infra.run)
 ---
+## Contents
+
+  * About me and infra.run
+  * Challenges (and our solutions)
+    * BBB related
+    * Social issues
+    * External Factors
+  * Outlook
+---
 ## About me
+  ![danimo](img/danimo_square.jpg)
   * Software Engineer by trade
-    * KDE
-    * Trolltech/Nokia
-    * Nextcloud
-    * SUSE
+    * KDE -> Trolltech/Nokia -> Nextcloud -> SUSE
+  * Video person by hobby ([C3VOC](https://c3voc.de))
   * Sysadmin by heart
   * Author by accident  
 ---
@@ -40,17 +48,15 @@ Daniel Molkentin\
   * Early 2019: First ideas to do a Hosting Coop (*"Hey, I've got some spare RIPE IP space!"*) with an attitude
   * Dec 2019: Cyber4Edu founded
   * 2020: Pandemic hits
-  * First baby steps with a larger over-the-weekend conference
-  * No way we do this by hand: Ansible, noemis role
+  * First steps hosting a educational exchange event
+    * No way we do this by hand: Ansible, noemis role
   * Coop gets deferred -> Limited Liability Company (GmbH)
 ---
 ## About infra.run (Cont'd)
  How it's going:
-  * Running a significant BBB cluster
+  * Running a large BBB cluster serving public schools in Berlin, Bavaria and schools in other States
   * Revamping Lernraum Berlin (SSO, GDPR-compliant retention policy)
-  * Soon offering a complete Open Source based offering for schools (SSO, LMS, Storage, Website Publishing, ...)
   * Everything we do or host is Open Source
-  * Limited Liability Company finally goes Coop
 ---
 ## Choosing BigBlueButton
   * C4E tried Jitsi -> did not scale
@@ -60,23 +66,24 @@ Daniel Molkentin\
     * Moderation features
 ---
 ## BBB Bootstrapping
- * Start out with VMs
- * Scale out to a few hundered VMs (Intel, 8 Dedi Cores)
-   * Each is good for up to 120 users
+ * Started out with VMs
+ * Scaleed out to a few hundered VMs (Intel, 8 Dedi Cores)
+   * Each is good for ~120 users (avg)
    * Each has a companion VM for TURN
  * Quick to ramp up and maintain
  * Rather expensive
- * Reevaluate Costs
+ * Time to reevaluate costs
 ---
 ## BBB Bootstrapping (Cont'd)
  * Rent 100 physical servers (AMD Ryzen 9 3900 12-Core)
-   * Each is good for up to 150 users
+   * Each is good for 150 users (avg)
    * Way below potential
  * Optimize heavily
    * Reduce Cursor update rates
    * Roll out TUC-BBB-HTML5-Packages for 2.2
    * Productize 2.3 early
-   * Now each is good for up to 300 users
+   * Now each is good for up to 300 users (avg)
+ * Predicting quality of service still hard
 ---
 ## Challenges (and how we solved them)
  The 8am problem (less utilized capacity in total)
@@ -89,13 +96,29 @@ Daniel Molkentin\
  * Lots of entering into and returning from Breakout Rooms
  * 2.2: Kurento says no
  * 2.3: Kurento says yes (but only every so often)
-
+---
+## Challenges (Cont'd)
+ The Greedy ISP problem
+ * In March, our hoster contacted us
+ * Deutsche Telekom (40-50% of our traffic) has a double paid traffic scheme
+   * Tier 1 transit costs also for DTAG AS (!)
+ * Massive BBB traffic busted hosters calculations
+ * Consequences: All included traffic zeroed, special traffic pricing for BBB servers
+---
+## Challenges (Cont'd)
+ The Incompetent ISP problem
+ * Vodafone.de rolled out FW update for their cable customers that broke BBB
+ * Workarounds
+   * Disable HW offload
+   * Request downgrade / upgrade to beta
+ * Huge support load
+ * Lots of shared pain in the BBB.de community
 ---
 ## Challenges (Cont'd)
  Teachers and Technology
  * Dial-In needed, cluster wide
  * We delivered ([Ansible SIP-GW role](https://gitlab.com/infra.run/public/ansible-sipgw))
-  * Prohibit Anonymous Calls
+  * Prohibit anonymous calls
   * Allow first joiner to dial in without anyone joining via Mic first (part of EBBA role now)
 ---
 ## Challenges (Cont'd)
@@ -116,15 +139,16 @@ Daniel Molkentin\
  * On failure, drain node, reboot and rejoin node
 ---
 ## Challenges (Cont'd)
- * BBB has no concept of multiple tenants in a cluster
- * Did I meantion we had badly utilized capacity?
+ * Scalite has no concept of multiple tenants
  * Sharing the secret is a no-go
+ * Did I mention we had badly utilized capacity?
  * Lots of little Clusters (well, three...), lots of wasted compute
  * Enter b3scale!
 ---
 ## b3scale - A multi tenancy BBB scaling frontend
  * Written in Go
- * Really fast operations (batch enable/disable/removal)
+ * Development supported through Prototype Fund (BMBF, OKF)
+ * Really fast operations
  * "Frontends" (tenants) and "Backend" (nodes)
  * Tags (examples see next slide)
  * Agent process reports actual load (b3scalenoded)
@@ -140,23 +164,44 @@ Daniel Molkentin\
  * Experimental support for hiding nodes
    * XXXX.bbb.infra.run -> bbb.infra.run
    * XXXX.bbb.infra.run -> conference.tenant.org
+---
+## b3scale (Cont'd)
 
+
+ ![Grafana graph](img/tenants.png)
  [https://gitlab.com/infra.run/public/b3scale](https://gitlab.com/infra.run/public/b3scale)
 
 ---
 ## Success Factors
  * Fast implementation/pickup
-  * (TODO) Example: Translation of waiting page
-  * (TODO) Example: Discard Notification
+  * Example: Translation of waiting page
+  * Example: Discard Notification
+    ![End Meeting Dialog](img/endmeeting.png)
  * The Community (esp. BigBlueButton-DE Matrix Channel)
 ---
-## Things to improve
+## Things to Improve
  * Packaging (working on it)
  * The Kurento Situation (maybe 2.4?)
  * Scheduled/Predictable Rooms/Dial-In
  * Migration of running sessions
  * Whiteboard Export
- * iOS Support ¯\\_(ツ)_/¯
+ * iOS Support ¯\\\_(ツ)\_/¯
+---
+## Lessons learned
+ * Always audit your software
+   * It's the strength of Open Source. Use it!
+ * Anticipate external factors (ISPs)
+   * Threatening business model
+   * Increasing support load
+ * Virtualization is expensive, and of little benefit
+ * Make sure to understand exactly how your use case differs from others
+   * multiple tenants + customer hosted frontends 
+ * Open Source works
+---
+## The future for infra.run
+  * Limited Liability Company finally goes Coop
+  * Offering a complete Open Source based solution for schools\
+  ![offering](img/schoolenv.svg)
 ---
 ## Shoutouts
  * Blindside and the BBB community
@@ -165,11 +210,15 @@ Daniel Molkentin\
  * schrd @ TU Chemnitz
  * EBBA
  * *BrutalBirdie* for backporting patches to EBBA
+ * lukas2511 for digging into security related issues
 
 ---
 ## Thank you!
 
-Questions?
+Questions?\
+\
+Daniel Molkentin\
+[danimo@infra.run](mailto:danimo@infra.run)
 ---
                                   </textarea>
                                 </section>

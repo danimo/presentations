@@ -1,8 +1,8 @@
 body:after {
 content: url(img/infrarun.svg);
-transform: scale(0.2);
+transform: scale(0.15);
 position: fixed;
-bottom: -1em;
-left: 0em;
+bottom: -2em;
+left: -16em;
 }
 
